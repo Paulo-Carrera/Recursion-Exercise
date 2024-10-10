@@ -14,16 +14,13 @@ function productOfNums(nums){
 
 // LONGEST WORD 
 function longestWord(words){
-    for(let i = 0; i < words.length; i++){
-        if (words.length === 1 ){
-            return words[0];
-        }else{
-            return words[i].length > words[i + 1].length ? words[i] : longestWord(words.slice(1));
-        }
+    if(words.length === 1){
+        return words[0];
     }
+    const restLongest = longestWord(words.slice(1));
+    return words[0].length > restLongest.length ? words[0] : restLongest;
 }
-
-// console.log(longestWord(['wolverine', 'hotdog', 'sausages', 'party', 'jesslyn']));
+// console.log(longestWord(['wolverine', 'hotdog', 'sausages', 'party', 'fraudulent', 'jesslyn']));
 
 
 
@@ -42,13 +39,13 @@ function everyOtherChar(str){
 
 // IS PALINDROME ?
 function isPalindrome(str){
-    for (let i = 0 ; i < str.length; i++){
-        if (str[i] === str[str.length - 1 - i]){
-            return true;
-        }else{
-            return false;
-        }
+    if (str.length <= 1){   // if the string is empty or has only one character it is a palindrome
+        return true;
     }
+    if (str[0] !== str[str.length - 1]){    // if the first and last characters are not equal it is not a palindrome
+        return false;
+    }
+    return isPalindrome(str.slice(1, -1));  // if the first and last characters are equal, check if the rest of the string is a palindrome
 }
 
 // console.log(isPalindrome('racecar'));
@@ -114,3 +111,16 @@ function binarySearch(arr, target, left = 0 , right = arr.length - 1){
 }
 
 // console.log(binarySearch([1,2,3,4,5,6,7,8,9,10], 4));
+
+
+
+module.exports = {
+    productOfNums,
+    longestWord,
+    everyOtherChar,
+    isPalindrome,
+    findIndex,
+    reverseString,
+    gatherStrings,
+    binarySearch
+}
